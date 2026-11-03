@@ -1,6 +1,7 @@
 package service
 
 import (
+	_ "embed"
 	"encoding/json"
 	"os"
 	"runtime"
@@ -63,8 +64,8 @@ var defaultValueMap = map[string]string{
 	"subEncode":        "true",
 	"subShowInfo":      "false",
 	"subURI":           "",
-	"subJsonExt":       "",
-	"subClashExt":      "",
+	"subJsonExt":       defaultJsonSubscriptionTemplate,
+	"subClashExt":      defaultClashSubscriptionTemplate,
 	"subClashNoDefGrp": "false",
 	"subClashSprtAll":  "false",
 	"subClashUdp":      "false",
@@ -74,6 +75,12 @@ var defaultValueMap = map[string]string{
 
 type SettingService struct {
 }
+
+//go:embed templates/json.json
+var defaultJsonSubscriptionTemplate string
+
+//go:embed templates/clash.yaml
+var defaultClashSubscriptionTemplate string
 
 func (s *SettingService) GetAllSetting() (*map[string]string, error) {
 	db := database.GetDB()

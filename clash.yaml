@@ -1,0 +1,208 @@
+mixed-port: 7897
+allow-lan: false
+ipv6: false
+mode: rule
+log-level: warning
+
+
+find-process-mode: always
+unified-delay: true
+tcp-concurrent: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.arpa"
+    - time.*.com
+    - '*.sub2api.online'
+    - ntp.*.com
+    - "*.msftncsi.com"
+    - www.msftconnecttest.com
+    - localhost.ptlogin2.qq.com
+
+  default-nameserver:
+    - https://223.5.5.5/dns-query#DIRECT
+    - https://223.6.6.6/dns-query#DIRECT
+
+  direct-nameserver:
+    - 223.5.5.5
+    - 223.6.6.6
+  direct-nameserver-follow-policy: true
+
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query#DIRECT
+    - https://223.6.6.6/dns-query#DIRECT
+
+  nameserver:
+    - https://1.1.1.1/dns-query#Proxy
+    - https://8.8.8.8/dns-query#Proxy
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+
+rule-anchor:
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs }
+  domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs }
+
+rule-providers:
+  private_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs",
+    }
+  cn_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs",
+    }
+  cn_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs",
+    }
+  reject_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs",
+    }
+  microsoft_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs",
+    }
+  ai_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs",
+    }
+  github_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs",
+    }
+  youtube_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs",
+    }
+  google_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs",
+    }
+  gfw_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs",
+    }
+  google_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs",
+    }
+  telegram_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+    }
+
+
+rules:
+  - PROCESS-NAME,Google Chrome Helper (Aperitif),Proxy
+  - PROCESS-NAME,Google Chrome Helper (Aperitif Render),Proxy
+  - DOMAIN-SUFFIX,apple.com,Proxy
+  - DOMAIN-SUFFIX,openai.com,Proxy
+  - DOMAIN-SUFFIX,chatgpt.com,Proxy
+  - DOMAIN-SUFFIX,oaistatic.com,Proxy
+  - DOMAIN-SUFFIX,oaiusercontent.com,Proxy
+  - DOMAIN-SUFFIX,claude.com,Proxy
+  - DOMAIN-SUFFIX,claude.ai,Proxy
+  - DOMAIN-SUFFIX,anthropic.com,Proxy
+  - RULE-SET,ai_domain,Proxy
+  - DOMAIN-SUFFIX,apple.com,Proxy
+  - DOMAIN,api.devicecheck.apple.com,Proxy
+  - DOMAIN,devicecheck.apple.com,Proxy
+  - DOMAIN,desktop.chat.openai.com,Proxy
+  - DOMAIN,ws.chatgpt.com,Proxy
+
+  - PROCESS-NAME,Antigravity,Proxy
+  - PROCESS-NAME,Antigravity Helper,Proxy
+  - PROCESS-NAME,Antigravity Helper (Plugin),Proxy
+  - PROCESS-NAME,Antigravity Helper (GPU),Proxy
+  - PROCESS-NAME,Antigravity Helper (Renderer),Proxy
+  - PROCESS-NAME,language_server_macos_arm,Proxy
+  - PROCESS-NAME,language_server_linux_x64,Proxy
+
+  - PROCESS-NAME,Claude,Proxy
+  - PROCESS-NAME,ChatGPT,Proxy
+  - PROCESS-NAME,Claude Helper,Proxy
+  - PROCESS-NAME,Claude Helper (Renderer),Proxy
+  - PROCESS-NAME,claude,Proxy
+  - PROCESS-NAME,code,Proxy
+  - PROCESS-NAME,Code Helper,Proxy
+  - PROCESS-NAME,Code Helper (Renderer),Proxy
+  - PROCESS-NAME,Code Helper (Plugin),Proxy
+  - PROCESS-NAME,Code Helper (GPU),Proxy
+  - PROCESS-NAME,Cursor,Proxy
+  - PROCESS-NAME,Cursor Helper,Proxy
+  - PROCESS-NAME,Cursor Helper (Renderer),Proxy
+  - PROCESS-NAME,Cursor Helper (Plugin),Proxy
+  - PROCESS-NAME,Cursor Helper (GPU),Proxy
+  - PROCESS-NAME,Telegram,Proxy
+  - PROCESS-NAME,git,Proxy
+  - PROCESS-NAME,Antigravity.exe,Proxy
+  - PROCESS-NAME,language_server_windows_x64.exe,Proxy
+  - PROCESS-NAME,claude.exe,Proxy
+  - PROCESS-NAME,Kiro.exe,Proxy
+  - PROCESS-NAME,Code - Insiders.exe,Proxy
+  - PROCESS-NAME,code.exe,Proxy
+  - PROCESS-NAME,ChatGPT.exe,Proxy
+  - PROCESS-NAME,Cursor.exe,Proxy
+  - PROCESS-NAME,cursor.exe,Proxy
+  - PROCESS-NAME,Telegram.exe,Proxy
+  - PROCESS-NAME,git-bash.exe,Proxy
+  - PROCESS-NAME,git-cmd.exe,Proxy
+  - RULE-SET,private_domain,DIRECT
+  - RULE-SET,reject_domain,REJECT
+  - DOMAIN,developer.apple.com,Proxy
+  - DOMAIN,testflight.apple.com,Proxy
+  - DOMAIN,sandbox.itunes.apple.com,Proxy
+  - DOMAIN,itunes.apple.com,Proxy
+  - DOMAIN-SUFFIX,apps.apple.com,Proxy
+  - DOMAIN-SUFFIX,digicert.com,Proxy
+  - DOMAIN,ocsp.apple.com,Proxy
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+  - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+  - RULE-SET,cn_domain,DIRECT
+  - RULE-SET,cn_ip,DIRECT
+  - DOMAIN-SUFFIX,chatgpt.com,Proxy
+  - DOMAIN-SUFFIX,google.com,Proxy
+  - DOMAIN-SUFFIX,googleapis.com,Proxy
+  - DOMAIN-SUFFIX,cursor.sh,Proxy
+  - RULE-SET,github_domain,Proxy
+  - RULE-SET,youtube_domain,Proxy
+  - RULE-SET,google_domain,Proxy
+  - RULE-SET,gfw_domain,Proxy
+  - RULE-SET,google_ip,Proxy
+  - RULE-SET,telegram_ip,Proxy
+  - RULE-SET,microsoft_domain,Proxy
+  - GEOIP,Private,DIRECT
+  - MATCH,Proxy

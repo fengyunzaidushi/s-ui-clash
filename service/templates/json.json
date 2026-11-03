@@ -1,0 +1,695 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "type": "https",
+        "tag": "direct-dns",
+        "server": "223.5.5.5",
+        "path": "/dns-query",
+        "detour": "direct"
+      },
+      {
+        "type": "https",
+        "tag": "direct-dns-2",
+        "server": "223.6.6.6",
+        "path": "/dns-query",
+        "detour": "direct"
+      },
+      {
+        "type": "https",
+        "tag": "proxy-dns",
+        "server": "1.1.1.1",
+        "path": "/dns-query",
+        "detour": "proxy"
+      },
+      {
+        "type": "https",
+        "tag": "proxy-dns-2",
+        "server": "8.8.8.8",
+        "path": "/dns-query",
+        "detour": "proxy"
+      },
+      {
+        "type": "local",
+        "tag": "local-dns"
+      }
+    ],
+    "rules": [
+      {
+        "clash_mode": "Global",
+        "action": "route",
+        "server": "proxy-dns"
+      },
+      {
+        "clash_mode": "Direct",
+        "action": "route",
+        "server": "direct-dns"
+      }
+    ],
+    "final": "direct-dns",
+    "strategy": "prefer_ipv4"
+  },
+  "rule_set": [
+    {
+      "tag": "private_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "cn_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "cn_ip",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "reject_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "microsoft_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "ai_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ai-!cn.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "github_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/github.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "youtube_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "google_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "gfw_domain",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/gfw.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "google_ip",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs",
+      "download_detour": "direct"
+    },
+    {
+      "tag": "telegram_ip",
+      "type": "remote",
+      "format": "binary",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs",
+      "download_detour": "direct"
+    }
+  ],
+  "rules": [
+    {
+      "action": "route",
+      "process_name": [
+        "Google Chrome Helper (Aperitif)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Google Chrome Helper (Aperitif Render)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "openai.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "chatgpt.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "oaistatic.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "oaiusercontent.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "claude.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "claude.ai"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "anthropic.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "ai_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "api.devicecheck.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "devicecheck.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "desktop.chat.openai.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "ws.chatgpt.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity Helper"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity Helper (Plugin)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity Helper (GPU)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity Helper (Renderer)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "language_server_macos_arm"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "language_server_linux_x64"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Claude"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "ChatGPT"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Claude Helper"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Claude Helper (Renderer)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "claude"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "code"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Code Helper"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Code Helper (Renderer)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Code Helper (Plugin)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Code Helper (GPU)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor Helper"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor Helper (Renderer)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor Helper (Plugin)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor Helper (GPU)"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Telegram"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "git"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Antigravity.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "language_server_windows_x64.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "claude.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Kiro.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Code - Insiders.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "code.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "ChatGPT.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Cursor.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "cursor.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "Telegram.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "git-bash.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "process_name": [
+        "git-cmd.exe"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "private_domain"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "reject",
+      "rule_set": [
+        "reject_domain"
+      ]
+    },
+    {
+      "action": "route",
+      "domain": [
+        "developer.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "testflight.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "sandbox.itunes.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "itunes.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "apps.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "digicert.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain": [
+        "ocsp.apple.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "mzstatic.com"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "icloud.com"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "icloud-content.com"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "aaplimg.com"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "cn_domain"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "cn_ip"
+      ],
+      "outbound": "direct"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "chatgpt.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "google.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "googleapis.com"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "domain_suffix": [
+        "cursor.sh"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "github_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "youtube_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "google_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "gfw_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "google_ip"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "telegram_ip"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "rule_set": [
+        "microsoft_domain"
+      ],
+      "outbound": "proxy"
+    },
+    {
+      "action": "route",
+      "ip_is_private": true,
+      "outbound": "direct"
+    }
+  ],
+  "default_domain_resolver": "direct-dns"
+}
