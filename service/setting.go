@@ -42,31 +42,34 @@ var defaultConfig = `{
 }`
 
 var defaultValueMap = map[string]string{
-	"webListen":     "",
-	"webDomain":     "",
-	"webPort":       "2095",
-	"secret":        common.Random(32),
-	"webCertFile":   "",
-	"webKeyFile":    "",
-	"webPath":       "/app/",
-	"webURI":        "",
-	"sessionMaxAge": "0",
-	"trafficAge":    "30",
-	"timeLocation":  "Asia/Tehran",
-	"subListen":     "",
-	"subPort":       "2096",
-	"subPath":       "/sub/",
-	"subDomain":     "",
-	"subCertFile":   "",
-	"subKeyFile":    "",
-	"subUpdates":    "12",
-	"subEncode":     "true",
-	"subShowInfo":   "false",
-	"subURI":        "",
-	"subJsonExt":    "",
-	"subClashExt":   "",
-	"config":        defaultConfig,
-	"version":       config.GetVersion(),
+	"webListen":        "",
+	"webDomain":        "",
+	"webPort":          "2095",
+	"secret":           common.Random(32),
+	"webCertFile":      "",
+	"webKeyFile":       "",
+	"webPath":          "/app/",
+	"webURI":           "",
+	"sessionMaxAge":    "0",
+	"trafficAge":       "30",
+	"timeLocation":     "Asia/Tehran",
+	"subListen":        "",
+	"subPort":          "2096",
+	"subPath":          "/sub/",
+	"subDomain":        "",
+	"subCertFile":      "",
+	"subKeyFile":       "",
+	"subUpdates":       "12",
+	"subEncode":        "true",
+	"subShowInfo":      "false",
+	"subURI":           "",
+	"subJsonExt":       "",
+	"subClashExt":      "",
+	"subClashNoDefGrp": "false",
+	"subClashSprtAll":  "false",
+	"subClashUdp":      "false",
+	"config":           defaultConfig,
+	"version":          config.GetVersion(),
 }
 
 type SettingService struct {
@@ -413,6 +416,22 @@ func (s *SettingService) GetSubJsonExt() (string, error) {
 
 func (s *SettingService) GetSubClashExt() (string, error) {
 	return s.getString("subClashExt")
+}
+
+// GetSubClashNoDefGrp reports whether generated Clash subscriptions omit the
+// default Proxy and Auto groups.
+func (s *SettingService) GetSubClashNoDefGrp() (bool, error) {
+	return s.getBool("subClashNoDefGrp")
+}
+
+// GetSubClashSprtAll reports whether "all" expands to every generated proxy.
+func (s *SettingService) GetSubClashSprtAll() (bool, error) {
+	return s.getBool("subClashSprtAll")
+}
+
+// GetSubClashUdp reports whether generated Clash proxies opt into UDP.
+func (s *SettingService) GetSubClashUdp() (bool, error) {
+	return s.getBool("subClashUdp")
 }
 
 func (s *SettingService) fileExists(path string) error {
