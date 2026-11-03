@@ -52,8 +52,8 @@ const (
 	// 脚本里只有在 /usr/local/s-ui/db/s-ui.db 不存在时才生成随机账号密码和端口,
 	// 已装过的机器走的是「保留现有设置」那条路 —— 否则 Web 点一下更新就会
 	// 把管理员锁在面板外面。
-	panelUpdaterURL      = "https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh"
-	panelReleaseAPI      = "https://api.github.com/repos/Teminuosi/s-ui/releases/latest"
+	panelUpdaterURL      = "https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh"
+	panelReleaseAPI      = "https://api.github.com/repos/fengyunzaidushi/s-ui-clash/releases/latest"
 	maxPanelUpdaterBytes = 2 << 20
 )
 

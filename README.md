@@ -1,15 +1,13 @@
-<h1 align="center">S-UI(改版)</h1>
+<h1 align="center">S-UI Clash</h1>
 
 <p align="center">
-  基于 <a href="https://github.com/SagerNet/sing-box">SagerNet/sing-box</a> 的高级 Web 面板<br><br>
+  基于 <a href="https://github.com/Teminuosi/s-ui">Teminuosi/s-ui</a> 的二次开发版本，底层使用 <a href="https://github.com/SagerNet/sing-box">SagerNet/sing-box</a><br><br>
+  <a href="https://github.com/fengyunzaidushi/s-ui-clash"><img alt="项目仓库" src="https://img.shields.io/badge/GitHub-fengyunzaidushi%2Fs--ui--clash-181717?style=flat-square&logo=github"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true"></a>
 </p>
 
-<h3 align="center">推荐用 TMS 客户端管理，不用敲命令，点一下全部搭好</h3>
-
 <p align="center">
-  一键搭建 · 建协议 · 建中转 · 改端口 · 卸载 · 测延迟，常用功能都在客户端里<br>
-  <sub>Recommended: manage with the TMS client — one-click setup, protocols, relays, ports, uninstall and latency tests.</sub>
+  一键安装 · 协议模板 · 中转管理 · 多服务器管理 · JSON / Clash 订阅规则模板
 </p>
 
 <p align="center">
@@ -20,195 +18,152 @@
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=bmcHIdvaic8&t=62s"><img src="https://img.youtube.com/vi/bmcHIdvaic8/maxresdefault.jpg" alt="TMS 客户端视频教程" width="720"></a><br>
-  <sub>▶ 点封面观看视频教程（YouTube）</sub>
-</p>
-
-<p align="center">
-  🌐 <a href="https://3yuedaohang.com">官网 / 导航站</a>
-  &nbsp;·&nbsp;
-  📺 <a href="https://www.youtube.com/@zhanzhang3yue">YouTube 频道</a>
-  &nbsp;·&nbsp;
-  🖥️ <a href="https://3yuedaohang.com/cn2/banwagong">机器推荐</a><br>
-  <sub>免费节点、搭建教程、订阅工具，一站直达</sub>
+  <sub>▶ 点击封面观看视频教程</sub>
 </p>
 
 ---
 
-> 本仓库是 [alireza0/s-ui](https://github.com/alireza0/s-ui) 的二次开发分支,在保留上游全部能力的基础上,
-> 把已在 [3x-ui 改版](https://github.com/Teminuosi/3x-ui) 验证过的体验改进搬了过来:
-> 全自动一键安装、面板更新指向本仓库、协议模板、行内二维码、批量删除、中转与多节点部署(逐步推进)。
->
-> 仅供个人学习与交流,请勿用于非法用途,请勿用于生产环境。上游版权归原作者所有。
+## 项目关系
 
----
+- **当前项目**：[fengyunzaidushi/s-ui-clash](https://github.com/fengyunzaidushi/s-ui-clash)
+- **直接上游**：[Teminuosi/s-ui](https://github.com/Teminuosi/s-ui)
+- **原始上游**：[alireza0/s-ui](https://github.com/alireza0/s-ui)
+- **前端子模块**：[Teminuosi/s-ui-frontend](https://github.com/Teminuosi/s-ui-frontend)
+- **内核**：[SagerNet/sing-box](https://github.com/SagerNet/sing-box)
 
-## 快速开始
+本项目在保留上游 S-UI 面板能力的基础上，继续维护安装体验、协议快速创建、中转、多服务器管理，以及订阅规则模板等功能。项目内置的 [clash.yaml](clash.yaml) 和 [json.json](json.json) 会作为新安装实例的默认订阅规则模板。
 
-### 全自动安装(推荐)
+> 仅供个人学习与交流，请遵守当地法律法规。请在充分测试后再用于生产环境。
 
-一条命令装好,全程无需交互:全自动会自动生成随机管理员账号密码和随机面板路径,装完直接打印访问信息。
+## 快速安装
 
-```sh
-SUI_AUTO=1 bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh)
-```
+### Linux 全自动安装（默认推荐）
 
-### 交互式安装
-
-想自己一步步设置端口、路径、账号密码,用普通模式:
+安装脚本默认是无人值守模式，会自动完成安装并生成随机管理员账号、密码、面板路径、可用端口和 API Token。安装结束时会打印访问信息。
 
 ```sh
-bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh)
 ```
 
-装好后,在服务器上随时输入 `s-ui` 打开管理菜单(启动/停止/重启、改设置、改账号、SSL 证书、BBR 等)。
+### Linux 交互式安装
+
+需要手动输入端口、路径或账号密码时，显式关闭自动模式：
+
+```sh
+SUI_AUTO=0 bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh)
+```
+
+### 安装指定版本
+
+```sh
+bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh) v1.4.2
+```
+
+版本号以当前仓库 Releases 中的 Tag 为准。
 
 ### Windows
 
-1. 从 [Releases](https://github.com/Teminuosi/s-ui/releases/latest) 下载最新 Windows 包并解压
-2. 以管理员身份运行 `install-windows.bat`,按向导完成
+1. 从 [当前项目 Releases](https://github.com/fengyunzaidushi/s-ui-clash/releases/latest) 下载 Windows 压缩包。
+2. 解压后以管理员身份运行 `install-windows.bat`。
 
----
+### Docker / 本地构建
 
-## 默认安装信息
+```sh
+git clone --recurse-submodules https://github.com/fengyunzaidushi/s-ui-clash
+cd s-ui-clash
+docker build -t s-ui-clash .
+```
 
-| 项目         | 默认值     |
-| ------------ | ---------- |
-| 面板端口     | `2095`     |
-| 面板路径     | `/app/`    |
-| 订阅端口     | `2096`     |
-| 订阅路径     | `/sub/`    |
-| 账号 / 密码  | `admin`    |
+运行时至少映射面板端口和订阅端口，并持久化数据库与证书目录：
 
-> 全自动安装(`SUI_AUTO=1`)会把账号密码和面板路径换成随机值,请留意安装结束时打印的信息。
-> 升级(已存在数据库)时全自动模式会**保留原有设置**,不会改动你的账号与路径。
+```sh
+docker run -itd \
+  -p 2095:2095 -p 2096:2096 \
+  -v "$PWD/db:/app/db" \
+  -v "$PWD/cert:/root/cert" \
+  --name s-ui-clash --restart=unless-stopped \
+  s-ui-clash
+```
 
----
+## 安装后的默认行为
 
-## 与上游的差异(本分支在做的事)
+| 项目 | 默认值 |
+| --- | --- |
+| 面板端口 | `2095`（自动安装会避让占用端口） |
+| 面板路径 | `/app/`（自动安装会随机生成） |
+| 订阅端口 | `2096`（自动安装会避让占用端口） |
+| 订阅路径 | `/sub/` |
+| 管理账号 | 自动安装随机生成 |
+| API Token | 自动生成并在安装结束时打印 |
+| JSON 订阅规则 | 自动填入 `json.json` 模板 |
+| Clash 订阅规则 | 自动填入 `clash.yaml` 模板 |
 
-- **阶段 0 — Fork 基建**:安装/更新脚本全部指向本仓库;CI 按 tag 出 Release 并把版本号写进面板;全自动安装体验。✅
-- **阶段 1 — 一键模板 + 二维码 + 批量删除**:常用协议(VLESS+Reality、Hysteria2 等)一键建好;客户端列表行内出二维码;入站/客户端支持多选批量删除。🚧
-- **阶段 2 — 中转**:粘贴落地分享链接→自动转 outbound→一步配好路由的"添加中转"向导。🚧
-- **阶段 3 — 多节点部署**:以"另一台 S-UI = 一个节点"的方式,中央面板通过 APIv2 令牌远程下发配置、同步流量与心跳。🚧
+升级时会保留已有账号、路径、端口和订阅设置。安装完成后可直接执行 `s-ui` 打开管理菜单。
 
-> 持续跟进上游修复与 sing-box 内核升级,按需回合(不整体合并)。
+如果安装中途失败，可使用不依赖已安装文件的彻底清理命令：
 
----
+```sh
+bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh) purge
+```
+
+该命令会删除 S-UI 服务、数据库、程序文件和管理脚本；数据库删除后无法恢复，请先备份。
+
+## 主要功能
+
+- **一键协议模板**：VLESS + Reality、Hysteria2、TUIC、Trojan、AnyTLS，可自动创建入站、TLS 配置和客户端。
+- **中转向导**：粘贴落地分享链接或 SOCKS5 地址，自动创建出站、入口和路由规则，并测试落地连通性。
+- **多服务器管理**：通过 APIv2 Token 从一个面板切换管理多台 S-UI 服务器。
+- **订阅规则模板**：默认提供 Clash YAML 和 sing-box JSON 规则模板；JSON 模板包含规则集、DNS 分流和应用／域名路由规则。
+- **Clash 订阅选项**：支持禁用默认分组、将 `all` 展开为全部节点，以及默认启用 UDP。
+- **分享与批量操作**：入站卡片二维码、订阅与链接批量导出、批量删除入站和中转。
+- **面板维护**：Web 内版本检查与更新、随机凭据、API Token、端口冲突检测、安装失败清理和防火墙放行。
+- **界面体验**：多语言、六套渐变皮肤、明暗主题和响应式管理界面。
 
 ## 支持的平台
 
-| 平台    | 架构 | 状态 |
-|---------|------|------|
-| Linux   | amd64 / arm64 / armv7 / armv6 / armv5 / 386 / s390x | ✅ |
+| 平台 | 架构 | 状态 |
+| --- | --- | --- |
+| Linux | amd64 / arm64 / armv7 / armv6 / armv5 / 386 / s390x | ✅ |
 | Windows | amd64 / 386 / arm64 | ✅ |
-| macOS   | amd64 / arm64 | 🚧 实验性 |
+| macOS | amd64 / arm64 | 🚧 实验性 |
 
-## 功能概览
-
-- 多协议:Mixed、SOCKS、HTTP、Direct、Redirect、TProxy;VLESS、VMess、Trojan、Shadowsocks;ShadowTLS、Hysteria、Hysteria2、Naive、TUIC(支持 XTLS)
-- 入站 / 出站高级配置;流量路由界面(PROXY Protocol、外部/透明代理、SSL、端口)
-- 客户端流量上限与到期时间;在线客户端、流量统计与系统状态监控
-- 订阅服务(link / json / clash,可加外部订阅);面板与订阅 HTTPS
-- 多语言(英语、波斯语、越南语、简体中文、繁体中文、俄语);明暗主题;API 接口
-
----
-
-## Docker 安装
-
-<details>
-<summary>展开</summary>
-
-```shell
-# 安装 Docker
-curl -fsSL https://get.docker.com | sh
-
-# 运行 S-UI(GHCR 镜像)
-mkdir s-ui && cd s-ui
-docker run -itd \
-    -p 2095:2095 -p 2096:2096 -p 443:443 -p 80:80 \
-    -v $PWD/db/:/app/db/ \
-    -v $PWD/cert/:/root/cert/ \
-    --name s-ui --restart=unless-stopped \
-    ghcr.io/teminuosi/s-ui:latest
-```
-
-自行构建镜像:
-
-```shell
-git clone --recurse-submodules https://github.com/Teminuosi/s-ui
-cd s-ui
-docker build -t s-ui .
-```
-
-</details>
-
-## 卸载
-
-面板还能用的话，直接进管理菜单选卸载：
+## 从源码构建
 
 ```sh
-s-ui        # 菜单里选「卸载」
-```
+git clone --recurse-submodules https://github.com/fengyunzaidushi/s-ui-clash
+cd s-ui-clash
 
-### 卸载不掉 / 装到一半失败了怎么办
-
-安装中途被打断时，面板会处于**装了一半**的状态：文件还在，但菜单可能已经打不开。
-这条**彻底清除**命令不依赖任何已安装的文件：
-
-```sh
-bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh) purge
-```
-
-它会清掉：systemd 服务、`/etc/s-ui/`（含数据库）、`/usr/local/s-ui/`、
-以及 `/usr/bin/s-ui` 管理命令，并杀掉残留进程释放端口。清完可以直接重新安装。
-
-> 注意：**数据库会一起删掉**，入站和用户配置不会保留。
-
----
-
-## 本地开发
-
-<details>
-<summary>展开</summary>
-
-```shell
-# 克隆(含前端子模块)
-git clone --recurse-submodules https://github.com/Teminuosi/s-ui
-cd s-ui
-
-# 一键构建并运行(前端 + 后端)
-./runSUI.sh
-```
-
-分步构建:
-
-```shell
 # 前端
-cd frontend && npm install && npm run build && cd ..
-# 后端(需先构建前端)
-rm -fr web/html/* && cp -R frontend/dist/* web/html/
+cd frontend
+npm install
+npm run build
+cd ..
+
+# 将前端静态文件复制到后端资源目录
+rm -rf web/html/*
+cp -R frontend/dist/* web/html/
+
 go build -o sui main.go
 ./sui
 ```
 
-前端代码在独立子模块仓库:[Teminuosi/s-ui-frontend](https://github.com/Teminuosi/s-ui-frontend)
-
-</details>
+前端目录是独立 Git 子模块；如果只需要构建后端，请确保 `web/html` 中已经存在前端构建产物。
 
 ## 环境变量
 
-| 变量           | 取值                                     | 默认     |
-| -------------- | ---------------------------------------- | -------- |
-| SUI_LOG_LEVEL  | `debug` / `info` / `warn` / `error`      | `info`   |
-| SUI_DEBUG      | `true` / `false`                         | `false`  |
-| SUI_BIN_FOLDER | 字符串                                   | `bin`    |
-| SUI_DB_FOLDER  | 字符串                                   | `db`     |
-| SINGBOX_API    | 字符串                                   | -        |
-
----
+| 变量 | 取值 | 默认 |
+| --- | --- | --- |
+| `SUI_LOG_LEVEL` | `debug` / `info` / `warn` / `error` | `info` |
+| `SUI_DEBUG` | `true` / `false` | `false` |
+| `SUI_BIN_FOLDER` | 字符串 | `bin` |
+| `SUI_DB_FOLDER` | 字符串 | `db` |
+| `SINGBOX_API` | 字符串 | - |
 
 ## 致谢
 
-- 上游项目:[alireza0/s-ui](https://github.com/alireza0/s-ui)、[alireza0/s-ui-frontend](https://github.com/alireza0/s-ui-frontend)
-- 内核:[SagerNet/sing-box](https://github.com/SagerNet/sing-box)
-- [API 文档(上游 Wiki)](https://github.com/alireza0/s-ui/wiki/API-Documentation)
+- 当前项目：[fengyunzaidushi/s-ui-clash](https://github.com/fengyunzaidushi/s-ui-clash)
+- 上游项目：[Teminuosi/s-ui](https://github.com/Teminuosi/s-ui)
+- 原始项目：[alireza0/s-ui](https://github.com/alireza0/s-ui)
+- 前端：[Teminuosi/s-ui-frontend](https://github.com/Teminuosi/s-ui-frontend)
+- 内核：[SagerNet/sing-box](https://github.com/SagerNet/sing-box)
+- [API 文档（上游 Wiki）](https://github.com/alireza0/s-ui/wiki/API-Documentation)

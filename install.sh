@@ -12,8 +12,8 @@ cur_dir=$(pwd)
 # panel path + free ports + an API token and opens the firewall, then prints the
 # access info; on an upgrade it keeps existing settings untouched. To get the old
 # interactive flow back, set SUI_AUTO=0 (or n). Examples:
-#   bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh)            # auto (default)
-#   SUI_AUTO=0 bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh) # interactive
+#   bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh)            # auto (default)
+#   SUI_AUTO=0 bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh) # interactive
 SUI_AUTO="${SUI_AUTO:-1}"
 
 is_auto() {
@@ -127,7 +127,7 @@ if [[ "$1" == "purge" || "$1" == "uninstall" || "$1" == "--purge" ]]; then
     rm -f /usr/bin/s-ui
 
     echo -e "${green}Done. s-ui has been completely removed.${plain}"
-    echo -e "Reinstall with: ${green}bash <(curl -Ls https://raw.githubusercontent.com/Teminuosi/s-ui/main/install.sh)${plain}"
+    echo -e "Reinstall with: ${green}bash <(curl -Ls https://raw.githubusercontent.com/fengyunzaidushi/s-ui-clash/main/install.sh)${plain}"
     exit 0
 fi
 
@@ -368,24 +368,24 @@ install_s-ui() {
     cd /tmp/
 
     if [ $# == 0 ]; then
-        last_version=$(curl -Ls "https://api.github.com/repos/Teminuosi/s-ui/releases/latest" | grep '"tag_name":' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+        last_version=$(curl -Ls "https://api.github.com/repos/fengyunzaidushi/s-ui-clash/releases/latest" | grep '"tag_name":' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
         # Fall back to the most recent release (covers prerelease-only repos:
         # /releases/latest skips prereleases, /releases lists everything).
         if [[ -z "$last_version" ]]; then
-            last_version=$(curl -Ls "https://api.github.com/repos/Teminuosi/s-ui/releases" | grep '"tag_name":' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+            last_version=$(curl -Ls "https://api.github.com/repos/fengyunzaidushi/s-ui-clash/releases" | grep '"tag_name":' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
         fi
         if [[ ! -n "$last_version" ]]; then
             echo -e "${red}Failed to fetch s-ui version, it maybe due to Github API restrictions, please try it later${plain}"
             exit 1
         fi
         echo -e "Got s-ui latest version: ${last_version}, beginning the installation..."
-        if ! download_release /tmp/s-ui-linux-$(arch).tar.gz "https://github.com/Teminuosi/s-ui/releases/download/${last_version}/s-ui-linux-$(arch).tar.gz"; then
+        if ! download_release /tmp/s-ui-linux-$(arch).tar.gz "https://github.com/fengyunzaidushi/s-ui-clash/releases/download/${last_version}/s-ui-linux-$(arch).tar.gz"; then
             echo -e "${red}Downloading s-ui failed after trying direct + mirrors. Make sure your server can reach Github (or a proxy) and that /tmp has free disk space.${plain}"
             exit 1
         fi
     else
         last_version=$1
-        url="https://github.com/Teminuosi/s-ui/releases/download/${last_version}/s-ui-linux-$(arch).tar.gz"
+        url="https://github.com/fengyunzaidushi/s-ui-clash/releases/download/${last_version}/s-ui-linux-$(arch).tar.gz"
         echo -e "Beginning the install s-ui $1"
         if ! download_release /tmp/s-ui-linux-$(arch).tar.gz "${url}"; then
             echo -e "${red}download s-ui $1 failed (tried direct + mirrors), please check the version exists${plain}"
