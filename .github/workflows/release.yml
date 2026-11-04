@@ -185,6 +185,10 @@ jobs:
           cp sui s-ui/
           cp s-ui.service s-ui/
           cp s-ui.sh s-ui/
+          # The panel serves its compiled Vue app from web/html at runtime.
+          # Include it in every archive; without this the binary installs and
+          # starts successfully but the UI (including quick templates) is absent.
+          cp -R web/html s-ui/
 
       - name: Package
         run: tar -zcvf s-ui-linux-${{ matrix.platform }}.tar.gz s-ui
