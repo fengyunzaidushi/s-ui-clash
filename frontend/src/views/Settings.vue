@@ -193,7 +193,7 @@ const settings = ref({
   subClashExt: "",
   subClashNoDefGrp: "false",
   subClashSprtAll: "false",
-  subClashUdp: "false",
+  subClashUdp: "true",
 })
 
 const updateInfo = ref<any>(null)

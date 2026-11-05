@@ -68,7 +68,7 @@ var defaultValueMap = map[string]string{
 	"subClashExt":      defaultClashSubscriptionTemplate,
 	"subClashNoDefGrp": "false",
 	"subClashSprtAll":  "false",
-	"subClashUdp":      "false",
+	"subClashUdp":      "true",
 	"config":           defaultConfig,
 	"version":          config.GetVersion(),
 }
