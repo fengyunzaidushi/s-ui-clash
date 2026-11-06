@@ -21,11 +21,11 @@ export const SKINS: Skin[] = [
   { id: 'mint', base: 'light', swatch: 'linear-gradient(135deg,#a7f3d0,#bae6fd)' },
 ]
 
-export const DEFAULT_SKIN: SkinId = 'aurora'
+export const DEFAULT_SKIN: SkinId = 'mesh'
 
 export function savedSkin(): Skin {
   const id = localStorage.getItem('skin') as SkinId | null
-  return SKINS.find((s) => s.id === id) ?? SKINS[0]
+  return SKINS.find((s) => s.id === id) ?? SKINS.find((s) => s.id === DEFAULT_SKIN)!
 }
 
 /** Reflect the chosen skin onto <html> so styles/skins.css picks its gradient. */

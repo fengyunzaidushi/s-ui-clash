@@ -73,7 +73,7 @@ const theme = useTheme()
 const locale = useLocale()
 
 // Same gradient-skin picker as the in-panel app bar, so the login screen shows
-// the chosen skin (default Aurora) and stays in sync with the rest of the UI.
+// the chosen skin (default Mesh / 流光网格) and stays in sync with the rest of the UI.
 const skins = SKINS
 const currentSkin = ref<SkinId>(savedSkin().id)
 
